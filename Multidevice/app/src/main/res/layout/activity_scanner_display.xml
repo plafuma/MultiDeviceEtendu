@@ -1,0 +1,45 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.example.pierrelafuma.multideviceetendumaquette.ScannerDisplayActivity">
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageButton"
+        android:src="@android:drawable/ic_menu_preferences"
+        android:layout_alignParentStart="true"
+        android:background="#ff73b8ff"
+        android:layout_alignTop="@+id/imageButtonListeDevice"
+        android:layout_alignBottom="@+id/imageButtonListeDevice" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageButtonListeDevice"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:src="@android:drawable/ic_menu_call"
+        android:background="#ff73b8ff" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:layout_marginTop="120dp"
+        android:src="@drawable/qrcode"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Scanner"
+        android:id="@+id/buttonScan"
+        android:layout_alignBottom="@+id/imageButtonListeDevice"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>
