@@ -75,12 +75,7 @@ public class MainActivity extends Activity {
 			executor.authenticate(responseHandler);
 			text.setText("Login in progress");
 			
-			
-		}
-
-	};
-	
-						// server response
+			// server response
 						RESTResponseHandler responseHandler2 = new RESTResponseHandler() {
 
 							
@@ -106,6 +101,8 @@ public class MainActivity extends Activity {
 		}
 
 	};
+	
+						
 	
 	/*
 	private final OnClickListener infosButtonClickListener = new OnClickListener() {
