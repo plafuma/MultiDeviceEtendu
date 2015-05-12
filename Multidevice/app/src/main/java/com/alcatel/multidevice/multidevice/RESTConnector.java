@@ -3,11 +3,16 @@ package com.alcatel.multidevice.multidevice;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.CookieHandler;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
 import android.util.Log;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
 public class RESTConnector {
@@ -101,7 +106,7 @@ public class RESTConnector {
 
 			int responseCode = connection.getResponseCode();
 			Log.v(TAG, "Response code is: " + responseCode);
-			Log.v(TAG, url+" " + connection.getResponseMessage()+ " " +CookieHandler.getDefault().toString());
+			Log.v(TAG, url+" " + connection.getResponseMessage()+ " " + CookieHandler.getDefault().toString());
 			
 			if (responseCode == 200) {
 
