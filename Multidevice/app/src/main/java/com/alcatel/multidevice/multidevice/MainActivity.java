@@ -64,9 +64,9 @@ public class MainActivity extends Activity {
 						text.setText("Login failed");
 					} else {
 						text.setText("Login Success");
-						Intent intent = new Intent(MainActivity.this, ScannerDisplayActivity.class);
+						/*Intent intent = new Intent(MainActivity.this, ScannerDisplayActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-		                startActivity(intent);
+		                startActivity(intent);*/
 					}
 				}
 			};
@@ -74,6 +74,33 @@ public class MainActivity extends Activity {
 			// Ask for login
 			executor.authenticate(responseHandler);
 			text.setText("Login in progress");
+			
+			
+		}
+
+	};
+	
+						// server response
+						RESTResponseHandler responseHandler2 = new RESTResponseHandler() {
+
+							
+							@Override
+							public void onResponse(String reponse) {
+								if (reponse.isEmpty()) {
+									text.setText(" failed");
+								} else {
+									text.setText("Session Oppened");
+									Intent intent = new Intent(MainActivity.this, ScannerDisplayActivity.class);
+									intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+									startActivity(intent);
+									
+								}
+							}
+						};
+
+						// Ask for login
+						executor.openSession(responseHandler2);
+						text.setText("Login in progress");
 			
 			
 		}

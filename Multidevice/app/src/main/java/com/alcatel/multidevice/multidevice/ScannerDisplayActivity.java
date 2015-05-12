@@ -20,15 +20,8 @@ public class ScannerDisplayActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scanner_display);
 
-        final ImageButton loginButton = (ImageButton) findViewById(R.id.imageButtonListeDevice);
-        loginButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                //Intent intent = new Intent(ScannerDisplayActivity.this, ListeDeviceActivity.class);
-                //startActivity(intent);
-            }
-        });
+        final ImageButton infosButton = (ImageButton) findViewById(R.id.imageButtonListeDevice);
+        infosButton.setOnClickListener(getInfosClickListener);
 
         final ImageButton optionButton = (ImageButton) findViewById(R.id.imageButton);
         optionButton.setOnClickListener(new View.OnClickListener() {
@@ -91,4 +84,39 @@ public class ScannerDisplayActivity extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
+	
+	
+	private final OnClickListener getInfosClickListener = new OnClickListener() {
+
+		@Override
+		public void onClick(View v) {
+			
+			// Start Login
+			DemoApplication app = (DemoApplication) getApplication();
+			RESTExecutor executor = app.getRestExecutor();
+			
+
+			// server response
+			RESTResponseHandler responseHandler = new RESTResponseHandler() {
+
+				
+				@Override
+				public void onResponse(String reponse) {
+					if (reponse.isEmpty()) {
+						//text.setText("failed");
+					} else {
+						//text.setText(reponse);
+					}
+				}
+			};
+
+			// Ask for login
+			executor.testUser(responseHandler);
+			//text.setText("Work in progress");
+			
+			
+		}
+
+	};
+	
 }
