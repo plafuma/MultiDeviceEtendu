@@ -9,6 +9,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
+
 
 public class ScannerDisplayActivity extends Activity {
 
@@ -42,12 +45,30 @@ public class ScannerDisplayActivity extends Activity {
 
             @Override
             public void onClick(View v) {
-                //Intent intent = new Intent(ScannerDisplayActivity.this, PhoneDetailsActivity.class);
-                //startActivity(intent);
+                IntentIntegrator integrator = new IntentIntegrator(ScannerDisplayActivity.this);
+                integrator.addExtra("SCAN_WIDTH", 640);
+                integrator.addExtra("SCAN_HEIGHT", 480);
+                integrator.addExtra("SCAN_MODE", "QR_CODE_MODE,PRODUCT_MODE");
+
+                integrator.addExtra("PROMPT_MESSAGE", "Scanning...");
+                integrator.initiateScan(IntentIntegrator.PRODUCT_CODE_TYPES);
+
             }
         });
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent intent){
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode,resultCode,intent);
+        if(result != null){
+            String contents = result.getContents();
+            if(contents != null){
+                //Lancer requete http
+            }else{
+                //Faire autre chose
+            }
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
