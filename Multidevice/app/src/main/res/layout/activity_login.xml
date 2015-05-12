@@ -21,7 +21,7 @@
         android:layout_gravity="center_horizontal" />
 
     <EditText
-        android:id="@+id/editText1"
+        android:id="@+id/_txtboxServer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/login_button"
@@ -33,11 +33,11 @@
         android:layout_marginLeft="20dp" />
 
     <EditText
-        android:id="@+id/editText5"
+        android:id="@+id/_txtBoxLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText6"
-        android:layout_below="@+id/editText6"
+        android:layout_alignLeft="@+id/_txtboxPassword"
+        android:layout_below="@+id/_txtboxPassword"
         android:layout_marginTop="22dp"
         android:ems="10"
         android:hint="Login"
@@ -45,11 +45,11 @@
         android:layout_marginLeft="20dp"/>
 
     <EditText
-        android:id="@+id/editText6"
+        android:id="@+id/_txtboxPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText1"
-        android:layout_below="@+id/editText1"
+        android:layout_alignLeft="@+id/_txtboxServer"
+        android:layout_below="@+id/_txtboxServer"
         android:layout_marginTop="26dp"
         android:ems="10"
         android:hint="Password"
