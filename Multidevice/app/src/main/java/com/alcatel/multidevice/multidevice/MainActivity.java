@@ -30,8 +30,8 @@ public class MainActivity extends Activity {
 	private void bindView() {
 		loginButton = (Button) findViewById(R.id.login_button);
 		loginButton.setOnClickListener(loginButtonClickListener);
-		infosButton = (Button) findViewById(R.id.button1);
-		infosButton.setOnClickListener(infosButtonClickListener);
+		//infosButton = (Button) findViewById(R.id.button1);
+		//infosButton.setOnClickListener(infosButtonClickListener);
 		text = (TextView) findViewById(R.id.text);
 		text.setText("");
 		serv = (EditText) findViewById(R.id.editText1);
@@ -79,7 +79,7 @@ public class MainActivity extends Activity {
 
 	};
 	
-	
+	/*
 	private final OnClickListener infosButtonClickListener = new OnClickListener() {
 
 		@Override
@@ -111,6 +111,6 @@ public class MainActivity extends Activity {
 			
 		}
 
-	};
+	};*/
 	
 }
