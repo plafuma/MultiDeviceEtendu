@@ -9,6 +9,7 @@ import java.net.URL;
 
 import android.util.Log;
 
+
 public class RESTConnector {
 	private static final String TAG = RESTConnector.class.getSimpleName();
 
@@ -65,21 +66,43 @@ public class RESTConnector {
 
 	}
 	
-	public String getInfoUser(){
+	public String openSession() {
 		URL url;
 		String ret = "";
 		HttpURLConnection connection = null;
+		
 
 		try {
 			url = new URL(SERVER_URL + "/api/rest/1.0/sessions");
-			ret="ok";
-			connection = (HttpURLConnection) url.openConnection();
-			connection.setDoInput(true);		
-			connection.connect();
+			
+				ret="ok";
+				connection = (HttpURLConnection) url.openConnection();
+				connection.setDoInput(true);	
+				connection.setDoOutput(true);
+				connection.setRequestProperty("Content-Type", "application/json");
+				connection.setRequestProperty("Accept", "application/json");
+				connection.setRequestMethod("POST");
+				
+				// on crée un objet json
+				JSONObject appName = new JSONObject();
+				try {
+					appName.put("applicationName", "TESTS_API"); //on ajoute l'attribut
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			
+				OutputStreamWriter wr= new OutputStreamWriter(connection.getOutputStream());
+				wr.write(appName.toString()); // on ajoute l'objet json à la requête
+				wr.flush();
+			
+			
 
 			int responseCode = connection.getResponseCode();
 			Log.v(TAG, "Response code is: " + responseCode);
-
+			Log.v(TAG, url+" " + connection.getResponseMessage()+ " " +CookieHandler.getDefault().toString());
+			
 			if (responseCode == 200) {
 
 				// Read the response JSON
@@ -103,6 +126,54 @@ public class RESTConnector {
 				connection.disconnect();
 			}
 		}
+		
 		return ret;
 	}
+	
+	public String testUser() {
+		URL url;
+		String ret = "";
+		HttpURLConnection connection = null;
+		
+
+		try {
+			url = new URL(SERVER_URL + "/api/rest/1.0/routing/profiles");
+			
+				ret="ok";
+				connection = (HttpURLConnection) url.openConnection();
+				
+			
+			
+
+			int responseCode = connection.getResponseCode();
+			Log.v(TAG, "Response code is: " + responseCode);
+			Log.v(TAG, url+" " + connection.getResponseMessage()+ " " +CookieHandler.getDefault().toString());
+			
+			if (responseCode == 200) {
+
+				// Read the response JSON
+				BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), "UTF-8"));
+				StringBuilder builder = new StringBuilder();
+				for (String line = null; (line = reader.readLine()) != null;) {
+					builder.append(line).append("\n");
+				}
+
+				Log.v(TAG, builder.toString());
+
+				ret = builder.toString();
+			}
+
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null) {
+				connection.disconnect();
+			}
+		}
+		
+		return ret;
+	}
+	
 }
