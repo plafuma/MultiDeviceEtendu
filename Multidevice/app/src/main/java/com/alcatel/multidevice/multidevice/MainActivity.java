@@ -30,13 +30,13 @@ public class MainActivity extends Activity {
 	private void bindView() {
 		loginButton = (Button) findViewById(R.id.login_button);
 		loginButton.setOnClickListener(loginButtonClickListener);
-		infosButton = (Button) findViewById(R.id.button1);
-		infosButton.setOnClickListener(infosButtonClickListener);
+		//infosButton = (Button) findViewById(R.id.button1);
+		//infosButton.setOnClickListener(infosButtonClickListener);
 		text = (TextView) findViewById(R.id.text);
 		text.setText("");
-		serv = (EditText) findViewById(R.id.editText1);
-		login = (EditText) findViewById(R.id.editText2);
-		passwd = (EditText) findViewById(R.id.editText3);
+		serv = (EditText) findViewById(R.id._txtboxServer);
+		login = (EditText) findViewById(R.id._txtBoxLogin);
+		passwd = (EditText) findViewById(R.id._txtboxPassword);
 	}
 
 	private final OnClickListener loginButtonClickListener = new OnClickListener() {
@@ -65,6 +65,7 @@ public class MainActivity extends Activity {
 					} else {
 						text.setText("Login Success");
 						Intent intent = new Intent(MainActivity.this, ScannerDisplayActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 		                startActivity(intent);
 					}
 				}
@@ -79,7 +80,7 @@ public class MainActivity extends Activity {
 
 	};
 	
-	
+	/*
 	private final OnClickListener infosButtonClickListener = new OnClickListener() {
 
 		@Override
@@ -111,6 +112,6 @@ public class MainActivity extends Activity {
 			
 		}
 
-	};
+	};*/
 	
 }
