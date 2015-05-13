@@ -1,7 +1,9 @@
 package com.alcatel.multidevice.multidevice;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,12 +33,13 @@ public class ScannerDisplayActivity extends Activity {
             @Override
             public void onClick(View v) {
                 IntentIntegrator integrator = new IntentIntegrator(ScannerDisplayActivity.this);
-                integrator.addExtra("SCAN_WIDTH", 640);
-                integrator.addExtra("SCAN_HEIGHT", 480);
+                integrator.addExtra("SCAN_WIDTH", 1920);
+                integrator.addExtra("SCAN_HEIGHT", 1080);
+                integrator.addExtra("SCAN_MODE", "QR_CODE_MODE");
                 //integrator.addExtra("SCAN_MODE", "QR_CODE_MODE,PRODUCT_MODE");
 
-                integrator.addExtra("PROMPT_MESSAGE", "Scanning...");
-                integrator.initiateScan(IntentIntegrator.PRODUCT_CODE_TYPES);
+                //integrator.addExtra("PROMPT_MESSAGE", "Scanning...");
+                integrator.initiateScan();
 
             }
         });
@@ -48,7 +51,14 @@ public class ScannerDisplayActivity extends Activity {
         if(result != null){
             String contents = result.getContents();
             if(contents != null){
-                //Lancer requete http
+                if(isCallActive(this.getApplicationContext()))
+                {
+                    Toast.makeText(getApplicationContext(), "ACTIF", Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(), "PAS ACTIF", Toast.LENGTH_LONG).show();
+                }
             }else{
                 //Faire autre chose
             }
@@ -110,5 +120,15 @@ public class ScannerDisplayActivity extends Activity {
 		}
 
 	};
+
+    public boolean isCallActive(Context context){
+        AudioManager manager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
+        if(manager.getMode()==AudioManager.MODE_IN_CALL){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 	
 }
