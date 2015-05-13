@@ -7,7 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -20,18 +20,10 @@ public class ScannerDisplayActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scanner_display);
 
-        final ImageButton infosButton = (ImageButton) findViewById(R.id.imageButtonListeDevice);
+
+        final Button infosButton = (Button) findViewById(R.id._buttonProfil);
         infosButton.setOnClickListener(getInfosClickListener);
 
-        final ImageButton optionButton = (ImageButton) findViewById(R.id.imageButton);
-        optionButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                //Intent intent = new Intent(ScannerDisplayActivity.this, OptionActivity.class);
-                //startActivity(intent);
-            }
-        });
 
         final Button phoneDetailsButton = (Button) findViewById(R.id.buttonScan);
         phoneDetailsButton.setOnClickListener(new View.OnClickListener() {
@@ -41,7 +33,7 @@ public class ScannerDisplayActivity extends Activity {
                 IntentIntegrator integrator = new IntentIntegrator(ScannerDisplayActivity.this);
                 integrator.addExtra("SCAN_WIDTH", 640);
                 integrator.addExtra("SCAN_HEIGHT", 480);
-                integrator.addExtra("SCAN_MODE", "QR_CODE_MODE,PRODUCT_MODE");
+                //integrator.addExtra("SCAN_MODE", "QR_CODE_MODE,PRODUCT_MODE");
 
                 integrator.addExtra("PROMPT_MESSAGE", "Scanning...");
                 integrator.initiateScan(IntentIntegrator.PRODUCT_CODE_TYPES);
@@ -86,7 +78,7 @@ public class ScannerDisplayActivity extends Activity {
     }
 	
 	
-	private final OnClickListener getInfosClickListener = new OnClickListener() {
+	private final View.OnClickListener getInfosClickListener = new View.OnClickListener() {
 
 		@Override
 		public void onClick(View v) {
@@ -105,7 +97,7 @@ public class ScannerDisplayActivity extends Activity {
 					if (reponse.isEmpty()) {
 						//text.setText("failed");
 					} else {
-						//text.setText(reponse);
+                        Toast.makeText(getApplicationContext(), reponse, Toast.LENGTH_LONG).show();
 					}
 				}
 			};

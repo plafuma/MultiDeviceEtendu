@@ -20,13 +20,22 @@
         android:background="@drawable/logo"
         android:layout_gravity="center_horizontal" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Connexion"
+        android:id="@+id/textView8"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dp" />
+
     <EditText
         android:id="@+id/_txtboxServer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/login_button"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         android:ems="10"
         android:hint="Server"
         android:layout_marginRight="20dp"
@@ -75,7 +84,7 @@
         android:layout_marginBottom="0dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="75dp"
-        android:background="@drawable/bouton"
+        android:background="@drawable/selector_button"
         android:layout_marginRight="40dp"
         android:layout_marginLeft="40dp"
         android:textColor="#FFFFFF" />
