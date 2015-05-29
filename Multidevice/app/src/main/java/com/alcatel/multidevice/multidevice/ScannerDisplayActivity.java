@@ -53,7 +53,26 @@ public class ScannerDisplayActivity extends Activity {
             if(contents != null){
                 if(isCallActive(this.getApplicationContext()))
                 {
+                    RESTResponseHandler responseHandler = new RESTResponseHandler() {
+
+
+                        @Override
+                        public void onResponse(String reponse) {
+                            if (reponse.isEmpty()) {
+                                Toast.makeText(getApplicationContext(), "Transfer Failed", Toast.LENGTH_LONG).show();
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Transfer Success", Toast.LENGTH_LONG).show();
+						/*Intent intent = new Intent(MainActivity.this, ScannerDisplayActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+		                startActivity(intent);*/
+                            }
+                        }
+                    };
+
                     Toast.makeText(getApplicationContext(), "ACTIF", Toast.LENGTH_LONG).show();
+                    DemoApplication app = (DemoApplication) getApplication();
+                    RESTExecutor executor = app.getRestExecutor();
+                    executor.transfer(responseHandler, "0", contents, false, false);
                 }
                 else
                 {

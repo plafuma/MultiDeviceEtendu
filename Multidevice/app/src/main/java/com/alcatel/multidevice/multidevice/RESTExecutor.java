@@ -17,6 +17,7 @@ import javax.net.ssl.X509TrustManager;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
+import android.widget.Toast;
 
 public class RESTExecutor {
 
@@ -77,6 +78,32 @@ public class RESTExecutor {
 
 		});
 	}
+
+    public void transfer(final RESTResponseHandler responseHandler, final String callRef, final String transferTo, final boolean anonymous, final boolean bypass) {
+        final DemoApplication app = (DemoApplication)context.getApplicationContext();
+
+        // Run the Web service in another thread
+        app.getExecutor().execute(new Runnable() {
+
+            @Override
+            public void run() {
+                RESTConnector connector = new RESTConnector();
+                Toast.makeText(app.getApplicationContext(), connector.lastCallRef(), Toast.LENGTH_LONG).show();
+
+                final String response = connector.transfer(callRef, transferTo, anonymous, bypass);
+
+                // When the web service is finished, call the response handler on the UI thread.
+                new Handler(Looper.getMainLooper()).post(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        responseHandler.onResponse(response);
+                    }
+                });
+            }
+
+        });
+    }
 
 	// always verify the host - dont check for certificate
 	private final HostnameVerifier fakeHostnameVerifier = new HostnameVerifier() {

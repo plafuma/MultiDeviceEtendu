@@ -37,6 +37,9 @@ public class MainActivity extends Activity {
 		serv = (EditText) findViewById(R.id._txtboxServer);
 		login = (EditText) findViewById(R.id._txtBoxLogin);
 		passwd = (EditText) findViewById(R.id._txtboxPassword);
+        serv.setText("http://ot2.sqanet.fr", TextView.BufferType.EDITABLE );
+        login.setText("cnam1", TextView.BufferType.EDITABLE);
+        passwd.setText("Alcatel1", TextView.BufferType.EDITABLE);
 	}
 
 	private final OnClickListener loginButtonClickListener = new OnClickListener() {
