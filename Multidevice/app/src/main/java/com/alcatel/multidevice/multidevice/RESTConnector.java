@@ -254,6 +254,10 @@ public class RESTConnector {
 		return ret;
 	}
 	
+	/**
+	 * Récupère les profils de routage de l'utilisateur connecté
+	 * @return json response
+	 */
 	public String testUser() {
 		URL url;
 		String ret = "";
@@ -299,5 +303,141 @@ public class RESTConnector {
 		
 		return ret;
 	}
+	
+	/**
+	 * Modifie les informations d'un profil de routage
+	 * @return json response
+	 */
+	public String modifProfil() {
+		
+		/*URL url;
+		String ret = "";
+		HttpURLConnection connection = null;
+		
+
+		try {
+			url = new URL(SERVER_URL + "/api/rest/1.0/routing/profiles/0");
+			
+				ret="ok";
+				connection = (HttpURLConnection) url.openConnection();
+				connection.setDoInput(true);	
+				connection.setDoOutput(true);
+				connection.setRequestProperty("Content-Type", "application/json");
+				connection.setRequestProperty("Accept", "application/json");
+				connection.setRequestMethod("POST");
+				
+				// on crée un objet json
+				JSONObject profileRequest = new JSONObject();
+				JSONObject presentationRoutes = new JSONObject();
+				JSONArray destinations = new JSONArray();
+				JSONObject type = new JSONObject();
+				JSONArray array1 = new JSONArray();
+				try {
+						
+					
+					//type.put("type", "OTHER");
+					//destinations.put(type);
+					//array1.put(destinations);
+					//profileRequest.put("presentationRoutes", presentationRoutes);
+					profileRequest.put("profileName", "TOTO");
+					
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+				
+			
+				OutputStreamWriter wr= new OutputStreamWriter(connection.getOutputStream());
+				wr.write(profileRequest.toString()); // on ajoute l'objet json à la requête
+				wr.flush();
+			
+			
+
+			int responseCode = connection.getResponseCode();
+			Log.v(TAG, "Response code is: " + responseCode);
+			Log.v(TAG, profileRequest.toString());
+			Log.v(TAG, url+" " + connection.getResponseMessage()+ " " +CookieHandler.getDefault().toString());
+			
+			if (responseCode == 200) {
+
+				// Read the response JSON
+				BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), "UTF-8"));
+				StringBuilder builder = new StringBuilder();
+				for (String line = null; (line = reader.readLine()) != null;) {
+					builder.append(line).append("\n");
+				}
+
+				Log.v(TAG, builder.toString());
+
+				ret = builder.toString();
+			}
+
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null) {
+				connection.disconnect();
+			}
+		}
+		
+		return ret;*/
+		
+		String idProfil = "0"; // profil par défaut
+		String res = "";
+		try {
+
+	        URL url = new URL(SERVER_URL + "/api/rest/1.0/routing/profiles/"+idProfil);
+	        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+	        conn.setDoInput(true);	
+	        conn.setDoOutput(true);
+	        conn.setRequestProperty("Content-Type", "application/json");
+	        conn.setRequestProperty("Accept", "application/json");
+	        conn.setRequestMethod("POST");
+	        String bool = "true";
+	       // String input = "{\"profileName\": \"TOTO\",\"presentationRoutes\": [ {\"destinations\": [ {\"type\": OTHER,\"deviceId\": \"toast\",\"number\": \"toast\",\"acceptable\": "  + bool + ",\"selected\": "  + bool + ",\"information\": {\"phoneNumber\": \"toast\",\"loginName\": \"toast\",\"lastName\": \"toast\",\"firstName\": \"toast\",\"email\": \"toast\"}} ]} ],\"forwardRoutes\": [ {\"overflowType\": BUSY,\"destinations\": [ {\"type\": OTHER,\"deviceId\": \"toast\",\"number\": \"toast\",\"acceptable\": "  + bool + ",\"selected\": "  + bool + ",\"information\": {\"phoneNumber\": \"toast\",\"loginName\": \"toast\",\"lastName\": \"toast\",\"firstName\": \"toast\",\"email\": \"toast\"}} ]} ],\"currentDeviceId\": \"3191\"}";
+	        String input2 = "{ \"profileName\": \"TOTO\", \"currentDeviceId\": \"3191\" }";
+	        OutputStreamWriter wr= new OutputStreamWriter(conn.getOutputStream());
+			wr.write(input2.toString()); // on ajoute l'objet json à la requête
+			wr.flush();
+			
+			
+			int responseCode = conn.getResponseCode();
+			Log.v(TAG, "Response code is: " + responseCode);
+			Log.v(TAG, input2);
+
+	        /*if (conn.getResponseCode() != HttpURLConnection.HTTP_CREATED) {
+	            throw new RuntimeException("Failed : HTTP error code : "
+	                + conn.getResponseCode());
+	        }*/
+
+	        BufferedReader br = new BufferedReader(new InputStreamReader(
+	                (conn.getInputStream())));
+
+	        String output;
+	        
+	        System.out.println("Output from Server .... \n");
+	        while ((output = br.readLine()) != null) {
+	            System.out.println(output);
+	            res+=output;
+	        }
+
+	        conn.disconnect();
+
+	      } catch (MalformedURLException e) {
+
+	        e.printStackTrace();
+
+	      } catch (IOException e) {
+
+	        e.printStackTrace();
+
+	     }
+		
+		
+		return res;
+		
+	}
+	
 	
 }
