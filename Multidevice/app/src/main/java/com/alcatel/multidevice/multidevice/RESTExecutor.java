@@ -210,4 +210,68 @@ public class RESTExecutor {
 		});
 	}
 	
+	/**
+	 * Ferme la session
+	 * @param responseHandler
+	 */
+	public void fermerSession(final RESTResponseHandler responseHandler) {
+		DemoApplication app = (DemoApplication)context.getApplicationContext();
+
+		// Run the Web service in another thread
+		app.getExecutor().execute(new Runnable() {
+
+			@Override
+			public void run() {
+				RESTConnector connector = new RESTConnector();
+
+				// Run the Web service
+				authenticating = true;
+				//connector.authenticate();
+				final String response = connector.closeSession();
+
+				// When the web service is finished, call the response handler on the UI thread.
+				new Handler(Looper.getMainLooper()).post(new Runnable() {
+
+					@Override
+					public void run() {
+						responseHandler.onResponse(response);
+					}
+				});
+			}
+
+		});
+	}
+	
+	/**
+	 * Modifie le profil de routage
+	 * @param responseHandler
+	 */
+	public void modifProfil(final RESTResponseHandler responseHandler) {
+		DemoApplication app = (DemoApplication)context.getApplicationContext();
+
+		// Run the Web service in another thread
+		app.getExecutor().execute(new Runnable() {
+
+			@Override
+			public void run() {
+				RESTConnector connector = new RESTConnector();
+
+				// Run the Web service
+				authenticating = true;
+				//connector.authenticate();
+				final String response = connector.modifProfil();
+
+				// When the web service is finished, call the response handler on the UI thread.
+				new Handler(Looper.getMainLooper()).post(new Runnable() {
+
+					@Override
+					public void run() {
+						responseHandler.onResponse(response);
+					}
+				});
+			}
+
+		});
+	}
+	
 }
