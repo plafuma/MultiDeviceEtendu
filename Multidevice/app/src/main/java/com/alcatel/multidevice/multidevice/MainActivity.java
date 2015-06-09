@@ -64,7 +64,7 @@ public class MainActivity extends Activity {
 				@Override
 				public void onResponse(String reponse) {
 					if (reponse.isEmpty()) {
-						text.setText("Login failed");
+						//text.setText("Login failed");
 					} else {
 						text.setText("Login Success");
 						/*Intent intent = new Intent(MainActivity.this, ScannerDisplayActivity.class);
@@ -85,7 +85,8 @@ public class MainActivity extends Activity {
 							@Override
 							public void onResponse(String reponse) {
 								if (reponse.isEmpty()) {
-									text.setText(" failed");
+									text.setText("Login" +
+                                            " failed");
 								} else {
 									text.setText("Session Oppened");
 									Intent intent = new Intent(MainActivity.this, ScannerDisplayActivity.class);

@@ -26,6 +26,31 @@ public class ScannerDisplayActivity extends Activity {
         final Button infosButton = (Button) findViewById(R.id._buttonProfil);
         infosButton.setOnClickListener(getInfosClickListener);
 
+        final Button deconnexionButton = (Button) findViewById(R.id._buttonDeconnexion);
+        final RESTResponseHandler responseHandler = new RESTResponseHandler() {
+
+
+            @Override
+            public void onResponse(String reponse) {
+                if (reponse.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Disconect Failed", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Disconected...", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(ScannerDisplayActivity.this, MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                }
+            }
+        };
+        deconnexionButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+            DemoApplication app = (DemoApplication) getApplication();
+            RESTExecutor executor = app.getRestExecutor();
+            executor.closeSession(responseHandler);
+        }});
+
 
         final Button phoneDetailsButton = (Button) findViewById(R.id.buttonScan);
         phoneDetailsButton.setOnClickListener(new View.OnClickListener() {

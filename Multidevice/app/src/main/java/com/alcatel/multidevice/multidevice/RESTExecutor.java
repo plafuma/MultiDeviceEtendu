@@ -214,7 +214,7 @@ public class RESTExecutor {
 	 * Ferme la session
 	 * @param responseHandler
 	 */
-	public void fermerSession(final RESTResponseHandler responseHandler) {
+	public void closeSession(final RESTResponseHandler responseHandler) {
 		DemoApplication app = (DemoApplication)context.getApplicationContext();
 
 		// Run the Web service in another thread
