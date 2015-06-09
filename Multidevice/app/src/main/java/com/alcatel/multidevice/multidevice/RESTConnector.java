@@ -87,7 +87,7 @@ public class RESTConnector {
         HttpURLConnection connection = null;
 
         try {
-            url = new URL(SERVER_URL + "/api/rest/telephony/calls");
+            url = new URL(SERVER_URL + "/api/rest/1.0/telephony/calls");
 
             connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
@@ -133,7 +133,7 @@ public class RESTConnector {
         String postMessage = "{ \"transferTo\": \""+transferTo+"\", \"anonymous\": "+anonymous+", \"bypass\": "+bypass+" }";
         HttpClient client = new DefaultHttpClient();
         try {
-            url = new URL(SERVER_URL + "/api/rest/telephony/calls/"+callRef+"/blindtransfer");
+            url = new URL(SERVER_URL + "/api/rest/1.0/telephony/calls/"+callRef+"/blindtransfer");
 
 //            connection = url.openConnection();
 //            connection.setEntity(new ByteArrayEntity(postMessage.toString().getBytes("UTF8")));
